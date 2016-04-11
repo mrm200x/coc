@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+<link
+	href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.css"
+	rel="stylesheet"/>
+<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css"
+	rel="stylesheet"/>
+<script th:attr="src=@{/statics/jquery.js}"></script>
+<link th:attr="href=@{/statics/bootstrap-theme.css}" rel="stylesheet"></link>
+<link th:attr="href=@{/statics/bootstrap.css}" rel="stylesheet"></link>
+
+</head>
+<body>
+	<div th:fragment="topbar">
+	<nav class="navbar navbar-default navbar-fixed-top" >
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Welcome</a>
+			</div>
+			<ul class="nav navbar-nav ">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Page 1</a></li>
+				<li><a href="#">Page 2</a></li>
+				<li><a href="#">Page 3</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+						Sign Up</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
+						Login</a></li>
+			</ul>
+		</div>
+	</nav>
+	</div>
+</body>
+</html>

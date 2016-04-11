@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop.xsd
+   http://www.springframework.org/schema/tool
+   http://www.springframework.org/schema/tool/spring-tool.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="consys" />
+	<mvc:annotation-driven />
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources/ directory -->
+	<mvc:resources mapping="/statics/**" location="/statics/" />
+
+		<bean id="templateResolver"
+	        class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+	    <property name="prefix" value="/WEB-INF/thymeleaf/" />
+	    <property name="suffix" value=".html" />
+	    <property name="templateMode" value="HTML5" />
+	    <property name="characterEncoding" value="UTF-8" />
+	  </bean>
+    
+	  <bean id="templateEngine"
+	        class="org.thymeleaf.spring4.SpringTemplateEngine">
+	    <property name="templateResolver" ref="templateResolver" />
+	    <property name="additionalDialects">
+		    <set>
+		      <bean class="nz.net.ultraq.thymeleaf.LayoutDialect"/>
+		    </set>
+		</property>
+	  </bean>
+	   
+	  <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+	    <property name="templateEngine" ref="templateEngine" />
+	    <property name="characterEncoding" value="UTF-8"/>
+	    <property name="order" value="1" />
+	  </bean>    
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver_class}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- 使用JDBC事物 -->
+	<bean id="trans"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 使用annotation注解方式配置事务 -->
+	<tx:annotation-driven transaction-manager="trans" />
+
+	<!-- 创建SqlSessionFactory，同时指定数据源 -->
+	<bean id="sqlSessionFactory" name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 指定sqlMapConfig总配置文件，订制的environment在spring容器中不在生效 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+
+	<bean id="mapperc" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		<property name="basePackage" value="consys.dao" />
+	</bean>
+
+
+	<mvc:annotation-driven validator="validator"/>
+     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+
+	<beans profile="loc">
+		<context:property-placeholder
+			location="classpath:loc/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+	<beans profile="zsc1">
+		<context:property-placeholder
+			location="classpath:zsc1/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+	<beans profile="zsc2">
+		<context:property-placeholder
+			location="classpath:zsc2/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+	<beans profile="pro">
+		<context:property-placeholder
+			location="classpath:pro/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+</beans>

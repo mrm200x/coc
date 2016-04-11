@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/layout/defaultLayout">
+<head>
+<meta charset="UTF-8" />
+<title>This is admin console</title>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+<link
+	href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.css"
+	rel="stylesheet"/>
+<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css"
+	rel="stylesheet"/>
+
+<script th:attr="src=@{/statics/jquery.js}"></script>
+<link th:attr="href=@{/statics/bootstrap-theme.css}" rel="stylesheet"></link>
+<link th:attr="href=@{/statics/bootstrap.css}" rel="stylesheet"></link>
+<link
+	th:attr="href=@{/statics/bootstrapValidator.css}"
+	rel="stylesheet"/>
+<script th:attr="src=@{/statics/bootstrapValidator.js}"></script>
+
+<script>
+	$(document).ready(fun ction() {
+	});
+</script>
+<style type="text/css">
+</style>
+</head>
+<body>
+<div layout:fragment="l_content">
+	<div class="container-fluid" >
+		<div class="row">
+			<div class="col-md-6">
+				<h3>header</h3>
+				<form id="addMenuForm" method="post" action="/admin/mergeMenu">
+					<div class="form-group">
+						<label for="pname">上级菜单</label> <input type="text"
+							class="form-control" id="pid" name="pid" th:value="${menu.menu}!=null?${menu.menu.menuId}:''"/>
+					</div>
+					<div class="form-group">
+						<label for="name">菜单名称</label> <input type="text"
+							class="form-control" id="name" name="name" th:value="${menu.name}"/>
+					</div>
+					<div class="form-group">
+						<label for="url">菜单url</label> <input type="text"
+							class="form-control" id="url" name="url" th:value="${menu.url}"/>
+					</div>
+					<div class="form-group">
+						<label for="permit">权限</label> <input type="text"
+							class="form-control" id="permit" name="permit" th:value="${menu.permit}"/>
+					</div>
+					<div class="form-group">
+						<label for="sort">排序</label> <input type="text"
+							class="form-control" id="sort" name="sort" th:value="${menu.sort}"/>
+					</div>
+
+					<button type="submit" class="btn btn-default ">保存</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

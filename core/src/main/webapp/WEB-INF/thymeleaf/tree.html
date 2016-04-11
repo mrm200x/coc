@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+<link
+	href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.css"
+	rel="stylesheet"/>
+<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css"
+	rel="stylesheet"/>
+<script th:attr="src=@{/statics/jquery.js}"></script>
+<link
+	th:attr="href=@{/statics/jquery.treetable.theme.default.css}"
+	rel="stylesheet"/>
+<link th:attr="href=@{/statics/bootstrap-theme.css}" rel="stylesheet"></link>
+<link th:attr="href=@{/statics/bootstrap.css}" rel="stylesheet"></link>
+<link
+	th:attr="href=@{/statics/bootstrapValidator.css}"
+	rel="stylesheet"/>
+<script th:attr="src=@{/statics/bootstrapValidator.js}"></script>
+<link
+	th:attr="href=@{/statics/jquery.treetable.css}"
+	rel="stylesheet"/>
+
+<script th:attr="src=@{/statics/jquery.treetable.js}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#your_table_id").treetable({ expandable: true });
+});
+
+</script>
+</head>
+<body>
+	<h1>Hello world!</h1>
+
+
+<table id="your_table_id" class="table table-striped">
+	<thead>
+		<tr>
+			<th>tr1</th>
+			<th>tr2</th>
+
+		</tr>
+	</thead>
+  <tr data-tt-id="1">
+    <td>Parent</td>
+    <td>Parent</td>
+  </tr>
+  <tr data-tt-id="2" data-tt-parent-id="1">
+    <td>Child</td>
+    <td>Child</td>
+  </tr>
+</table>
+
+
+</body>
+</html>
