@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop.xsd
+   http://www.springframework.org/schema/tool
+   http://www.springframework.org/schema/tool/spring-tool.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:component-scan base-package="consys" />
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/statics/**" location="/statics/" />
+	<!-- **************************************************************** -->
+	<!--  MESSAGE EXTERNALIZATION/INTERNATIONALIZATION                    -->
+	<!--  Standard Spring MessageSource implementation                    -->
+	<!-- **************************************************************** -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n/Messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+		<bean id="templateResolver"
+	        class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+	    <property name="prefix" value="/WEB-INF/thymeleaf/" />
+	    <property name="suffix" value=".html" />
+	    <property name="templateMode" value="HTML5" />
+	    <property name="characterEncoding" value="UTF-8" />
+	  </bean>
+    
+	  <bean id="templateEngine"
+	        class="org.thymeleaf.spring4.SpringTemplateEngine">
+	    <property name="templateResolver" ref="templateResolver" />
+	    <property name="additionalDialects">
+		    <set>
+		      <bean class="nz.net.ultraq.thymeleaf.LayoutDialect"/>
+		    </set>
+		</property>
+	  </bean>
+	   
+	  <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+	    <property name="templateEngine" ref="templateEngine" />
+	    <property name="characterEncoding" value="UTF-8"/>
+	    <property name="order" value="1" />
+	  </bean>    
+
+	<mvc:annotation-driven validator="validator"/>
+     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+
+	<beans profile="loc">
+		<context:property-placeholder
+			location="classpath:loc/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+	<beans profile="zsc1">
+		<context:property-placeholder
+			location="classpath:zsc1/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+	<beans profile="zsc2">
+		<context:property-placeholder
+			location="classpath:zsc2/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+	<beans profile="pro">
+		<context:property-placeholder
+			location="classpath:pro/*.properties,classpath:*.properties"
+			file-encoding="utf-8" />
+	</beans>
+</beans>

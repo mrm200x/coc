@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="D:\\repository\\mysql\\mysql-connector-java\\5.1.21\\mysql-connector-java-5.1.21.jar" />
+
+  <context id="OracleFrom" targetRuntime="MyBatis3">
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/test"
+        userId="root"
+        password="admin">
+    </jdbcConnection>
+
+    <javaModelGenerator targetPackage="consys.model" targetProject="src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="consys.dao"  targetProject="src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="consys.dao"  targetProject="src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+    
+    <table tableName="USER" ></table>
+ <!--
+    <table tableName="TS_MK_INFO12500" ></table>
+   <table tableName="TS_SP_GG_MX" ></table>
+     <table tableName="TS_SHOP_GG" ></table>
+    <table tableName="TS_SHOP_GG_VALUE" ></table>
+    <table tableName="TS_SP_PP_INFO" ></table>
+    <table tableName="TS_MK_SP_SX12500" ></table>
+    <table tableName="TS_MK_SP_ML" ></table>
+    <table tableName="TB_SYSTEM_MK_SP_SX12500" ></table>
+    <table tableName="TS_MK_SP_FX12500" ></table>
+    <table tableName="TS_ASSET_INFO" ></table> -->
+    
+        
+  </context>
+</generatorConfiguration>

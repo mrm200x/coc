@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+
+</head>
+<body>
+	<section layout:fragment="l_header">
+		<div th:include="/template/header :: header"></div>
+	</section>
+	<section layout:fragment="l_content">
+		<div>this is the content</div>
+	</section>
+	<section layout:fragment="l_footer">
+		<div th:include="/template/footer :: footer"></div>
+	</section>
+ </body>
+</html>

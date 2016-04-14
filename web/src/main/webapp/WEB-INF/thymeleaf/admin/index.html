@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script th:attr="src=@{/statics/js/jquery.min.js}"></script>
+    <script th:attr="src=@{/statics/js/jquery.easyui.min.js}"></script>
+    <link th:attr="href=@{/statics/css/easyui/themes/default/easyui.css}" rel="stylesheet"/>
+    <link th:attr="href=@{/statics/css/easyui/themes/default/icon.css}" rel="stylesheet"/>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+        });
+        function refreshAccording(){
+            var pp = $('#aa').accordion('getSelected');    // get the selected panel
+            if (pp){
+                pp.panel('refresh','https://www.baidu.com');    // call 'refresh' method to load new content
+            }
+        }
+
+        function  getTab(){
+
+
+            $('#tt').tabs('add',{
+                title:'New Tab',
+                content:'Tab Body',
+                closable:true,
+                tools:[{
+                    iconCls:'icon-mini-refresh',
+                    handler:function(){
+                        alert('refresh');
+                    }
+                }]
+            });
+        }
+
+        function addMyTab(dom){
+            if($('#frag1div')[0]){
+                $('#frag1div').dialog('destroy', true);
+            }
+
+            var name = $(dom).html();
+            $('#tt').tabs('add',{
+                title:name,
+                href:name+".html",
+                closable:true
+
+            });
+        }
+
+    </script>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'north',title:'North Title',split:true" style="height:10%"></div>
+<div data-options="region:'south',title:'South Title',split:true" style="height:10%"></div>
+<div data-options="region:'east',title:'East',split:true" style="width:10%;"></div>
+<div data-options="region:'west',title:'West',split:true" style="width:10%;">
+    <div id="aa" class="easyui-accordion" style="width:100%;">
+        <div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
+            <h3 style="color:#0099FF;">Accordion for jQuery</h3>
+            <p>Accordion is a part of easyui framework for jQuery.
+                It lets you define your accordion component on web page more easily.</p>
+        </div>
+        <div title="Title2" data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">
+            <ul class="easyui-tree">
+                <li>
+                    <span>Foods</span>
+                    <ul>
+                        <li>
+                            <span>Fruits</span>
+                            <ul>
+                                <li>apple</li>
+                                <li>orange</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Vegetables</span>
+                            <ul>
+                                <li>tomato</li>
+                                <li>carrot</li>
+                                <li>cabbage</li>
+                                <li>potato</li>
+                                <li>lettuce</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div title="Title3">
+            content3
+            <input type="button"  onclick="getTab()" />
+            <a onclick="addMyTab(this)">frag1</a>
+        </div>
+    </div>
+</div>
+<div data-options="region:'center',title:'center title'" style="background:#eee;">
+    <div id="tt" class="easyui-tabs" style="width:100%;height:100%;">
+        <div title="Tab1" style="padding:20px;display:none;">
+            tab1
+        </div>
+        <div title="Tab2" data-options="closable:true" style="overflow:auto;padding:20px;display:none;">
+            tab2
+        </div>
+        <div title="Tab3" data-options="iconCls:'icon-reload',closable:true" style="display:none;">
+            tab3
+        </div>
+    </div>
+
+
+</div>
+<div id ="myadd">wowowow</div>
+
+</body>
+</html>
